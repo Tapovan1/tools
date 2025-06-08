@@ -4,7 +4,7 @@ services:
   tools:
     build:
       context: .
-    container_name: hmt_frontend
+    container_name: tools
     ports:
       - "3003:3003"
     volumes:
