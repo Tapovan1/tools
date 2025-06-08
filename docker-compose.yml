@@ -2,17 +2,15 @@ version: '3.8'
 
 services:
   tools:
-
-      build:
+    build:
       context: .
-      container_name: hmt_frontend
-      ports:
+    container_name: hmt_frontend
+    ports:
       - "3003:3003"
-      volumes:
+    volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
-      environment:
+    environment:
       - NODE_ENV=development
       - PORT=3003
-   
