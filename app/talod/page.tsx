@@ -1,0 +1,71 @@
+"use client"
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+
+import Link from "next/link"
+import { ArrowLeft, ExternalLink } from "lucide-react"
+import { TalodTools } from "@/lib/links"
+
+export default function TalodPage() {
+  
+  const handleToolClick = (link: string) => {
+    window.open(link, "_blank")
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-8">
+          <Link href="/">
+            <Button variant="outline" size="sm" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Branches
+            </Button>
+          </Link>
+        </div>
+
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Talod Branch</h1>
+          <p className="text-gray-600 text-lg">Access all management tools for Talod campus</p>
+        </div>
+
+        {/* Tools Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {TalodTools.map((tool) => {
+            const IconComponent = tool.icon
+            return (
+              <Card
+                key={tool.name}
+                className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 group border hover:border-green-300"
+                onClick={() => handleToolClick(tool.link)}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between">
+                    <div
+                      className={`p-3 rounded-full ${tool.color} text-white group-hover:scale-110 transition-transform`}
+                    >
+                      <IconComponent className="h-5 w-5" />
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <CardTitle className="text-lg leading-tight">{tool.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-sm leading-relaxed mb-3">{tool.description}</CardDescription>
+                  <div className="text-xs text-green-600 group-hover:text-green-700">Click to open tool →</div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-16 text-center text-gray-500 text-sm">
+          <p>© 2024 Talod Branch - School Management System</p>
+        </div>
+      </div>
+    </div>
+  )
+}
